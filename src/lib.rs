@@ -42,4 +42,16 @@ mod tests {
         assert_eq!(iter.next(), Some(&2));
         assert_eq!(iter.next(), None);
     }
+    #[test]
+    fn test_isempty() {
+        let mut list: LinkedList<u32> = LinkedList::new();
+        list.push_back(0);
+        list.push_back(1);
+        list.push_back(2);
+        assert_eq!(list.is_empty(), false);
+        list.pop_back();
+        list.pop_back();
+        list.pop_back();
+        assert_eq!(list.is_empty(), true);
+    }
 }
