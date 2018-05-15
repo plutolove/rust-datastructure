@@ -1,6 +1,6 @@
 ## Rust implementation of data structure
 [![Build Status](https://travis-ci.org/plutolove/rust-datastructure.svg?branch=master)](https://travis-ci.org/plutolove/rust-datastructure)
-#### LinkedList
+#### Example of LinkedList
 ```rust
 fn main() {
     let mut list: LinkedList<u32> = LinkedList::new();
