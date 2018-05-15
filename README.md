@@ -3,15 +3,19 @@
 #### Example of LinkedList
 ```rust
 fn main() {
-    let mut list: LinkedList<u32> = LinkedList::new();
-    list.push_front(0);
-    list.push_back(1);
-    list.push_back(2);
-    let mut iter = list.iter();
-    assert_eq!(iter.next(), Some(&0));
-    assert_eq!(iter.next(), Some(&1));
-    assert_eq!(iter.next(), Some(&2));
-    assert_eq!(iter.next(), None);
-    list.clear();
+    let mut ls = LinkedList::new();
+    ls.push_back(46);
+    ls.push_back(45);
+    ls.push_back(43);
+    //mut iterator
+    for item in ls.iter_mut() {
+        *item += 10;
+    }
+    //immt iterator
+    let mut it = ls.iter();
+    assert_eq!(it.next(), Some(&56));
+    assert_eq!(it.next(), Some(&55));
+    assert_eq!(it.next(), Some(&53));
+    assert_eq!(it.next(), None);
 }
 ```
