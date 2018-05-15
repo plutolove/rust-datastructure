@@ -1,0 +1,6 @@
+[package]
+name = "DataStructure"
+version = "0.1.0"
+authors = ["mengshangqi <mengshangqis@gmail.com>"]
+
+[dependencies]
