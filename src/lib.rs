@@ -41,6 +41,20 @@ mod tests {
         assert_eq!(iter.next(), Some(&1));
         assert_eq!(iter.next(), Some(&2));
         assert_eq!(iter.next(), None);
+
+        let mut ls = LinkedList::new();
+        ls.push_back(46);
+        ls.push_back(45);
+        ls.push_back(43);
+
+        for item in ls.iter_mut() {
+            *item += 10;
+        }
+        let mut it = ls.iter();
+        assert_eq!(it.next(), Some(&56));
+        assert_eq!(it.next(), Some(&55));
+        assert_eq!(it.next(), Some(&53));
+        assert_eq!(it.next(), None);
     }
     #[test]
     fn test_isempty() {

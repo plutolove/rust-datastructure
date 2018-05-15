@@ -40,6 +40,13 @@ impl<'a, T> Clone for Iter<'a, T> {
     }
 }
 
+pub struct IterMut<'a, T: 'a> {
+    head: Option<NonNull<Node<T>>>,
+    tail: Option<NonNull<Node<T>>>,
+    len: usize,
+    marker: PhantomData<&'a mut T>,
+}
+
 impl<T> LinkedList<T> {
     #[inline]
     fn push_front_node(&mut self, mut node: Box<Node<T>>) {
@@ -122,6 +129,16 @@ impl<T> LinkedList<T> {
     }
 
     #[inline]
+    pub fn iter_mut(&mut self)-> IterMut<T> {
+        IterMut {
+            head: self.head,
+            tail: self.tail,
+            len: self.len,
+            marker: PhantomData,
+        }
+    }
+
+    #[inline]
     pub fn new() -> Self {
         LinkedList {
             head: None,
@@ -180,6 +197,23 @@ impl<T> LinkedList<T> {
 
     pub fn pop_back(&mut self) -> Option<T> {
         self.pop_back_node().map(Node::into_elem)
+    }
+}
+
+impl<'a, T> Iterator for IterMut<'a, T> {
+    type Item = &'a mut T;
+    #[inline]
+    fn next(&mut self)-> Option<&'a mut T> {
+        if self.len == 0 {
+            None
+        }else {
+            self.head.map(|node| unsafe {
+                let node = &mut *node.as_ptr();
+                self.len -= 1;
+                self.head = node.next;
+                &mut node.elem
+            })
+        }
     }
 }
 
