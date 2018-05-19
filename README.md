@@ -20,7 +20,7 @@ fn main() {
 }
 ```
 ### Example of Vector
-```
+```rust
 macro_rules! vec_of_D {
     ($($elem: expr), *) => {
         {
