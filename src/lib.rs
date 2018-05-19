@@ -73,7 +73,7 @@ mod tests {
     pub use collections::vector::Vector;
 
     macro_rules! vector {
-    ($($ele: expr), *) => {
+    ($($elem: expr), *) => {
         {
             let mut v = Vector::new();
             $(
