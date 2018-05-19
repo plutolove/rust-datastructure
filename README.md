@@ -26,7 +26,7 @@ macro_rules! vec_of_D {
         {
             let mut v = Vector::new();
             $(
-                v.push(D{x: $elem});
+                v.push($elem);
             )*
             v
         }
