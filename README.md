@@ -21,7 +21,7 @@ fn main() {
 ```
 ### Example of Vector
 ```rust
-macro_rules! vec_of_D {
+macro_rules! vector {
     ($($elem: expr), *) => {
         {
             let mut v = Vector::new();
