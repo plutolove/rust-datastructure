@@ -16,7 +16,6 @@ pub struct LinkedList<T> {
 
 pub struct Iter<'a, T: 'a> {
     head: Option<NonNull<Node<T>>>,
-    tail: Option<NonNull<Node<T>>>,
     len: usize,
     marker: PhantomData<&'a T>,
 }
@@ -42,7 +41,6 @@ impl<'a, T> Clone for Iter<'a, T> {
 
 pub struct IterMut<'a, T: 'a> {
     head: Option<NonNull<Node<T>>>,
-    tail: Option<NonNull<Node<T>>>,
     len: usize,
     marker: PhantomData<&'a mut T>,
 }
@@ -122,7 +120,6 @@ impl<T> LinkedList<T> {
     pub fn iter(&self) -> Iter<T> {
         Iter {
             head: self.head,
-            tail: self.tail,
             len: self.len,
             marker: PhantomData,
         }
@@ -132,7 +129,6 @@ impl<T> LinkedList<T> {
     pub fn iter_mut(&mut self)-> IterMut<T> {
         IterMut {
             head: self.head,
-            tail: self.tail,
             len: self.len,
             marker: PhantomData,
         }

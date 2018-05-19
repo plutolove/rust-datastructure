@@ -1,8 +1,9 @@
 #![feature(box_into_raw_non_null)]
 #![feature(dropck_eyepatch)]
+#![feature(ptr_internals)]
+#![feature(allocator_api)]
+#![feature(unique)]
 pub mod collections;
-
-
 
 #[cfg(test)]
 mod tests {
@@ -67,5 +68,73 @@ mod tests {
         list.pop_back();
         list.pop_back();
         assert_eq!(list.is_empty(), true);
+    }
+
+    pub use collections::vector::Vector;
+
+    macro_rules! vector {
+        ($($elem: expr), *) => {
+            {
+                let mut v = Vector::new();
+                $(
+                    v.push($elem);
+                )*
+                v
+            }
+        };
+    }
+
+    #[test]
+    fn test_push() {
+        let mut x = vector![1, 2, 3, 4, 5];
+        assert_eq!(x.len(), 5);
+    }
+
+    #[test]
+    fn test_pop() {
+        let mut x = vector![1, 2, 3, 4, 5];
+        assert_eq!(x.len(), 5);
+        let res = x.pop();
+        assert_eq!(x.len(), 4);
+        assert_eq!(res, Some(5));
+        let res = x.pop();
+        assert_eq!(x.len(), 3);
+        assert_eq!(res, Some(4));
+    }
+    #[derive(Debug, PartialEq)]
+    struct D<T> {
+        x: T,
+    }
+
+    macro_rules! vec_of_D {
+        ($($elem: expr), *) => {
+            {
+                let mut v = Vector::new();
+                $(
+                    v.push(D{x: $elem});
+                )*
+                v
+            }
+        };
+    }
+
+    #[test]
+    fn test_index() {
+        let x = vector![1, 2, 3, 4, 5];
+        assert_eq!(x[0], 1);
+        assert_eq!(x[1], 2);
+        assert_eq!(x[2], 3);
+        assert_eq!(x[3], 4);
+
+        let y = vec_of_D![1, 2, 3, 4, 5];
+        let z = D{x: 1};
+        assert_eq!(y[0], z)
+    }
+
+    #[test]
+    fn test_indexmut() {
+        let mut y = vector![1, 3, 4, 56, 76];
+        y[0] = 34;
+        assert_eq!(y[0], 34);
     }
 }
