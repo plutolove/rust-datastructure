@@ -77,7 +77,7 @@ mod tests {
         {
             let mut v = Vector::new();
             $(
-                v.push(%elem);
+                v.push($elem);
             )*
             v
         }
