@@ -19,3 +19,24 @@ fn main() {
     assert_eq!(it.next(), None);
 }
 ```
+### Example of Vector
+```
+macro_rules! vec_of_D {
+    ($($elem: expr), *) => {
+        {
+            let mut v = Vector::new();
+            $(
+                v.push(D{x: $elem});
+            )*
+            v
+        }
+    };
+}
+fn main() {
+    let mut y = vector![1, 3, 4, 56, 76];
+    y[0] = 34;
+    assert_eq!(y[0], 34);
+    y.push(456);
+    y.pop();
+}
+```

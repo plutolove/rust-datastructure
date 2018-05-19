@@ -167,4 +167,3 @@ impl<T> IndexMut<usize> for Vector<T> {
         &mut(**self)[index]
     }
 }
-
