@@ -127,7 +127,7 @@ mod tests {
         assert_eq!(x[3], 4);
 
         let y = vec_of_D![1, 2, 3, 4, 5];
-        let z = D{x: 1};
+        let z = D { x: 1 };
         assert_eq!(y[0], z)
     }
 
@@ -136,5 +136,35 @@ mod tests {
         let mut y = vector![1, 3, 4, 56, 76];
         y[0] = 34;
         assert_eq!(y[0], 34);
+    }
+
+    pub use collections::bitmap::BitMap;
+    fn init_bitmap(size: usize) -> BitMap {
+        BitMap::new(size)
+    }
+
+    #[test]
+    fn test_bitmap() {
+        let mut b = init_bitmap(10 as usize);
+        b.set(0);
+        assert_eq!(b.is_set(0), true);
+        b.set(1);
+        assert_eq!(b.is_set(1), true);
+
+        for i in 0..4 {
+            b.set(i as usize);
+        }
+        for i in 0..4 {
+            assert_eq!(b.is_set(i as usize), true);
+        }
+
+        for i in 4..10 {
+            assert_eq!(b.is_set(i), false);
+        }
+
+        for i in 0..4 {
+            b.unset(i);
+            assert_eq!(b.is_set(i), false);
+        }
     }
 }
