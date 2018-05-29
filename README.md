@@ -40,3 +40,12 @@ fn main() {
     y.pop();
 }
 ```
+### Example of BitMap
+```rust
+fn main() {
+    let mut b = BitMap::new(100);
+    b.set(10);
+    b.unset(10);
+    b.is_set(10);
+}
+```
